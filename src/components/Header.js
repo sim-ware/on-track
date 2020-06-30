@@ -9,7 +9,11 @@ export default function Header(props) {
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand href="/">On Track Book List</Navbar.Brand>
       <SearchBar />
-      <Paginator page={props.page} setPage={props.setPage} />
+      <Paginator
+        page={props.page}
+        setPage={props.setPage}
+        history={props.history}
+      />
     </Navbar>
   );
 }

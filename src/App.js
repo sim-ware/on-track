@@ -3,9 +3,9 @@ import Header from "./components/Header";
 import Body from "./components/Body";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-export default function App() {
-  const [page, setPage] = useState(1);
+// https://react-bootstrap.github.io/getting-started/introduction/
+export default function App(props) {
+  const [page, setPage] = useState(parseInt(props.match.params.page));
   const [bookList, setBookList] = useState();
 
   useEffect(() => {
@@ -24,11 +24,13 @@ export default function App() {
       .catch((error) => console.log(error));
   }, [page]);
 
-  console.log("*page", page);
+  // console.log("*props", props);
+  // console.log("*props.match.params.page", props.match.params.page);
+  // console.log("*page", page);
 
   return (
     <>
-      <Header page={page} setPage={setPage} />
+      <Header page={page} setPage={setPage} history={props.history} />
       <Body bookList={bookList ? bookList : null} />
     </>
   );
