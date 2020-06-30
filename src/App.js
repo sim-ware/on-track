@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Body from "./components/Body";
-import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-// https://react-bootstrap.github.io/getting-started/introduction/
+
 export default function App(props) {
   const [page, setPage] = useState(parseInt(props.match.params.page));
+  const [filters, setFilters] = useState([]);
   const [bookList, setBookList] = useState();
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export default function App(props) {
       body: JSON.stringify({
         page,
         itemsPerPage: 20,
-        filters: [],
+        filters,
       }),
     })
       .then((res) => res.json())
@@ -22,16 +22,17 @@ export default function App(props) {
         setBookList(response);
       })
       .catch((error) => console.log(error));
-  }, [page]);
-
-  // console.log("*props", props);
-  // console.log("*props.match.params.page", props.match.params.page);
-  // console.log("*page", page);
+  }, [page, filters]);
 
   return (
     <>
-      <Header page={page} setPage={setPage} history={props.history} />
-      <Body bookList={bookList ? bookList : null} />
+      <Header
+        page={page}
+        setPage={setPage}
+        setFilters={setFilters}
+        history={props.history}
+      />
+      <Body bookList={bookList ? bookList.books : null} />
     </>
   );
 }

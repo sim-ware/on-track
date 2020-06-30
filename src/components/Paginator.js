@@ -1,6 +1,12 @@
 import React from "react";
 import Pagination from "react-bootstrap/Pagination";
-import "../App.css";
+
+const styles = {
+  pagination: {
+    paddingLeft: "650px",
+    marginTop: "17px",
+  },
+};
 
 const clicker = (number, setPage, history) => {
   setPage(number);
@@ -10,10 +16,6 @@ const clicker = (number, setPage, history) => {
 export default function Paginator(props) {
   const { page, setPage, history } = props;
   let items = [];
-
-  //
-  // console.log("*page", typeof page);
-  //
 
   for (let number = 1; number <= 5; number++) {
     items.push(
@@ -27,9 +29,5 @@ export default function Paginator(props) {
     );
   }
 
-  return (
-    <Pagination style={{ paddingLeft: "100vh", marginTop: "15px" }}>
-      {items}
-    </Pagination>
-  );
+  return <Pagination style={styles.pagination}>{items}</Pagination>;
 }

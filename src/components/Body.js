@@ -1,11 +1,28 @@
 import React from "react";
-import LoadingSpinner from "./LoadingSpinner";
-import "../App.css";
+
+const styles = {
+  body: {
+    backgroundColor: "#1D7874",
+    minHeight: "95vh",
+  },
+  listContainer: {
+    paddingLeft: "50px",
+    paddingTop: "10px",
+  },
+};
 
 export default function Body(props) {
   return (
-    <div className="Body">
-      {props.bookList ? props.bookList.count : <LoadingSpinner />}
+    <div style={styles.body}>
+      <ul style={styles.listContainer}>
+        {props.bookList
+          ? props.bookList.map((book) => (
+              <li>
+                {book.id}: {book.book_title}
+              </li>
+            ))
+          : null}
+      </ul>
     </div>
   );
 }
